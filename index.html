@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>温馨的家</title>
+    <title>美丽的家</title>
     <style>
         body {
             margin: 0;
@@ -12,19 +12,20 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #e0f4ff 0%, #ffecf4 100%);
+            background: linear-gradient(45deg, #ffd1ff 0%, #fae8ff 25%, #e6f3ff 50%, #e4fffa 75%, #e8fff2 100%);
             position: relative;
             overflow: hidden;
         }
         
         .container {
-            width: 80%;
-            max-width: 800px;
-            aspect-ratio: 4/3;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            position: relative;
         }
         
         .house-illustration {
@@ -34,95 +35,189 @@
         
         .hello-world {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 30px;
+            left: 30px;
             color: #333;
-            font-size: 1.5rem;
-            animation: fadeIn 2s ease;
+            font-size: 1.8rem;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.5s ease-out;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .cloud {
-            animation: float 10s ease-in-out infinite;
+            animation: float 20s ease-in-out infinite;
         }
         
         @keyframes float {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(30px); }
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -10px); }
+            50% { transform: translate(40px, 0); }
+            75% { transform: translate(20px, 10px); }
+        }
+        
+        .bird {
+            animation: fly 15s linear infinite;
+        }
+        
+        @keyframes fly {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(1000px); }
+        }
+        
+        .flower {
+            animation: sway 3s ease-in-out infinite;
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg viewBox="0 0 800 600" class="house-illustration">
-            <!-- 天空背景 -->
-            <rect width="800" height="600" fill="#E1F5FE"/>
+        <svg viewBox="0 0 1000 600" class="house-illustration">
+            <!-- 天空渐变 -->
+            <defs>
+                <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#B2E1FF"/>
+                    <stop offset="100%" style="stop-color:#E6F7FF"/>
+                </linearGradient>
+                <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#FFD700"/>
+                    <stop offset="100%" style="stop-color:#FFA500"/>
+                </radialGradient>
+            </defs>
             
-            <!-- 太阳 -->
-            <circle cx="700" cy="100" r="50" fill="#FFD700">
+            <!-- 天空背景 -->
+            <rect width="1000" height="600" fill="url(#skyGradient)"/>
+            
+            <!-- 太阳及光晕 -->
+            <circle cx="800" cy="100" r="40" fill="url(#sunGlow)">
                 <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
             </circle>
+            <circle cx="800" cy="100" r="60" fill="url(#sunGlow)" opacity="0.3">
+                <animate attributeName="r" values="60;70;60" dur="3s" repeatCount="indefinite"/>
+            </circle>
             
-            <!-- 云朵 -->
+            <!-- 飘动的云朵 -->
             <g class="cloud" fill="#FFFFFF">
-                <path d="M 100 100 C 120 80 150 80 170 100 C 190 80 220 80 240 100 C 240 120 170 120 170 120 C 170 120 100 120 100 100"/>
-                <path d="M 500 150 C 520 130 550 130 570 150 C 590 130 620 130 640 150 C 640 170 570 170 570 170 C 570 170 500 170 500 150"/>
+                <path d="M 100 80 Q 130 50 160 80 Q 190 60 220 80 Q 200 100 160 100 Q 120 100 100 80" opacity="0.9"/>
+                <path d="M 400 120 Q 430 90 460 120 Q 490 100 520 120 Q 500 140 460 140 Q 420 140 400 120" opacity="0.7"/>
+                <path d="M 700 70 Q 730 40 760 70 Q 790 50 820 70 Q 800 90 760 90 Q 720 90 700 70" opacity="0.8"/>
             </g>
             
-            <!-- 草地 -->
-            <path d="M 0 400 L 800 400 L 800 600 L 0 600 Z" fill="#81C784"/>
+            <!-- 小鸟 -->
+            <g class="bird">
+                <path d="M 0 150 Q 10 140 20 150 Q 30 160 40 150" stroke="#555" fill="none" stroke-width="2"/>
+                <path d="M 10 150 Q 20 140 30 150 Q 40 160 50 150" stroke="#555" fill="none" stroke-width="2"/>
+            </g>
+            
+            <!-- 草地与小山 -->
+            <path d="M 0 350 Q 250 300 500 350 Q 750 400 1000 350 L 1000 600 L 0 600 Z" fill="#90CCA8"/>
+            <path d="M 800 280 Q 900 200 1000 280 L 1000 600 L 800 600 Z" fill="#7AB893" opacity="0.7"/>
             
             <!-- 房屋主体 -->
             <g class="house">
                 <!-- 主体墙壁 -->
-                <rect x="250" y="200" width="300" height="300" fill="#FFECB3"/>
+                <rect x="300" y="200" width="350" height="250" fill="#FFE4C4" rx="5"/>
                 
                 <!-- 屋顶 -->
-                <path d="M 200 200 L 400 100 L 600 200 Z" fill="#795548"/>
-                
-                <!-- 门 -->
-                <rect x="350" y="400" width="100" height="100" fill="#5D4037"/>
-                <circle cx="430" cy="450" r="5" fill="#FDD835"/>
-                
-                <!-- 窗户 -->
-                <g class="windows">
-                    <rect x="280" y="250" width="80" height="80" fill="#B3E5FC"/>
-                    <rect x="440" y="250" width="80" height="80" fill="#B3E5FC"/>
-                    <path d="M 280 290 L 360 290" stroke="#FFFFFF" stroke-width="2"/>
-                    <path d="M 320 250 L 320 330" stroke="#FFFFFF" stroke-width="2"/>
-                    <path d="M 440 290 L 520 290" stroke="#FFFFFF" stroke-width="2"/>
-                    <path d="M 480 250 L 480 330" stroke="#FFFFFF" stroke-width="2"/>
-                </g>
+                <path d="M 250 200 L 475 100 L 700 200" fill="#8B4513" stroke="#6B3E2E" stroke-width="5"/>
                 
                 <!-- 烟囱 -->
-                <rect x="500" y="150" width="30" height="50" fill="#795548"/>
-                <!-- 烟 -->
+                <rect x="600" y="150" width="30" height="50" fill="#8B4513"/>
+                <!-- 袋袋上升的烟 -->
                 <g class="smoke">
-                    <path d="M 510 140 Q 520 120 530 140" stroke="#BDBDBD" fill="none" stroke-width="2">
+                    <path d="M 610 140 Q 620 120 630 140" stroke="#D3D3D3" fill="none" stroke-width="3" opacity="0.6">
                         <animate attributeName="d" 
-                                values="M 510 140 Q 520 120 530 140;M 510 140 Q 520 100 530 140" 
-                                dur="2s" 
+                                values="M 610 140 Q 620 120 630 140;M 610 140 Q 620 100 630 140" 
+                                dur="3s" 
+                                repeatCount="indefinite"/>
+                        <animate attributeName="opacity" 
+                                values="0.6;0.3;0.6" 
+                                dur="3s" 
+                                repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 605 130 Q 615 110 625 130" stroke="#D3D3D3" fill="none" stroke-width="2" opacity="0.4">
+                        <animate attributeName="d" 
+                                values="M 605 130 Q 615 110 625 130;M 605 130 Q 615 90 625 130" 
+                                dur="4s" 
                                 repeatCount="indefinite"/>
                     </path>
                 </g>
+                
+                <!-- 门 -->
+                <g class="door">
+                    <rect x="450" y="300" width="80" height="150" fill="#8B4513" rx="5"/>
+                    <circle cx="515" cy="375" r="5" fill="#FFD700"/>
+                    <rect x="460" y="320" width="60" height="60" fill="#B8860B" opacity="0.3" rx="2"/>
+                </g>
+                
+                <!-- 窗户 -->
+                <g class="windows">
+                    <!-- 左窗 -->
+                    <rect x="350" y="250" width="70" height="90" fill="#B0E0E6" rx="5"/>
+                    <line x1="385" y1="250" x2="385" y2="340" stroke="white" stroke-width="2"/>
+                    <line x1="350" y1="295" x2="420" y2="295" stroke="white" stroke-width="2"/>
+                    <rect x="350" y="250" width="70" height="90" fill="none" stroke="#8B4513" stroke-width="5" rx="5"/>
+                    
+                    <!-- 右窗 -->
+                    <rect x="550" y="250" width="70" height="90" fill="#B0E0E6" rx="5"/>
+                    <line x1="585" y1="250" x2="585" y2="340" stroke="white" stroke-width="2"/>
+                    <line x1="550" y1="295" x2="620" y2="295" stroke="white" stroke-width="2"/>
+                    <rect x="550" y="250" width="70" height="90" fill="none" stroke="#8B4513" stroke-width="5" rx="5"/>
+                </g>
             </g>
             
-            <!-- 花草装饰 -->
-            <g class="decorations">
-                <path d="M 150 450 Q 160 420 170 450 L 160 470 Z" fill="#4CAF50"/>
-                <path d="M 600 480 Q 610 450 620 480 L 610 500 Z" fill="#4CAF50"/>
-                <circle cx="165" cy="445" r="5" fill="#FDD835"/>
-                <circle cx="615" cy="475" r="5" fill="#E91E63"/>
+            <!-- 花园装饰 -->
+            <g class="garden">
+                <!-- 花草 -->
+                <g class="flower" transform="translate(250,450)">
+                    <path d="M 0 0 C -5 -10 5 -10 0 0" fill="#FF69B4"/>
+                    <path d="M 0 0 C 5 -10 15 -10 10 0" fill="#FF69B4"/>
+                    <path d="M 0 0 L 0 20" stroke="#228B22" stroke-width="2"/>
+                </g>
+                <g class="flower" transform="translate(700,480)">
+                    <path d="M 0 0 C -5 -10 5 -10 0 0" fill="#DDA0DD"/>
+                    <path d="M 0 0 C 5 -10 15 -10 10 0" fill="#DDA0DD"/>
+                    <path d="M 0 0 L 0 20" stroke="#228B22" stroke-width="2"/>
+                </g>
+                
+                <!-- 灌木 -->
+                <g transform="translate(200,500)">
+                    <path d="M 0 0 Q 10 -30 20 0" stroke="#228B22" stroke-width="2" fill="none"/>
+                    <circle cx="10" cy="-15" r="5" fill="#90EE90"/>
+                </g>
+                <g transform="translate(750,520)">
+                    <path d="M 0 0 Q 10 -30 20 0" stroke="#228B22" stroke-width="2" fill="none"/>
+                    <circle cx="10" cy="-15" r="5" fill="#90EE90"/>
+                </g>
             </g>
             
             <!-- 小路 -->
-            <path d="M 400 500 C 380 520 420 540 400 560 C 380 580 420 600 400 600" 
-                  stroke="#8D6E63" 
-                  stroke-width="20" 
+            <path d="M 490 450 C 470 500 510 550 490 600" 
+                  stroke="#8B7355" 
+                  stroke-width="30" 
+                  stroke-linecap="round"
+                  fill="none"
+                  opacity="0.7"/>
+            <path d="M 490 450 C 470 500 510 550 490 600" 
+                  stroke="#A0522D" 
+                  stroke-width="5" 
+                  stroke-linecap="round"
+                  stroke-dasharray="10 5"
                   fill="none"/>
         </svg>
     </div>
